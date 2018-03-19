@@ -6,12 +6,12 @@
 #include <atomic>
 #include <thread>
 
-#ifdef WIN_OS
+#if defined(WIN_OS)
 #ifndef NOMINMAX
 #define NOMINMAX
 #endif
 #include "windows/win_socket.h"
-#elif POSIX_OS
+#elif  defined(POSIX_OS)
 #include "posix/posix_socket.h"
 #endif
 

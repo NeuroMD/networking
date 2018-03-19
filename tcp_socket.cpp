@@ -78,7 +78,7 @@ TcpClientSocket::TcpClientSocket(socket_t &&soc):
 }
 
 TcpClientSocket::TcpClientSocket(std::string address, PortNumberType port):
-    mAddressInfo(std::move(get_addr_info(SocketType::TCP, port, address))){
+    mAddressInfo(get_addr_info(SocketType::TCP, port, address)){
 
     if(!mAddressInfo)
         throw std::runtime_error("Unable to create address info");
