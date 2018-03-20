@@ -72,7 +72,7 @@ namespace Net
     }
 
     bool socket_bind(socket_t &socket, const addr_info_ptr &addres_info) noexcept {
-        assert(socket != INVALID_SOCKET);
+        assert(socket != -1);
         if (bind(socket, addres_info->ai_addr, static_cast<int>(addres_info->ai_addrlen)) == -1) {
             return false;
         }
@@ -80,7 +80,7 @@ namespace Net
     }
 
     bool socket_listen(socket_t &socket) noexcept {
-        assert(socket != INVALID_SOCKET);
+        assert(socket != -1);
         if (listen(socket, SOMAXCONN) == -1) {
             return false;
         }
@@ -99,7 +99,7 @@ namespace Net
     }
 
     ByteBuffer socket_receive(socket_t &socket){
-        assert(socket != INVALID_SOCKET);
+        assert(socket != -1);
         char recvbuf[RECEIVE_BUFFER_LEN];
         auto messageLength = recv(socket, recvbuf, RECEIVE_BUFFER_LEN, 0);
         if (messageLength == 0)
@@ -142,7 +142,7 @@ namespace Net
     }
 
     bool socket_send(socket_t &socket, const ByteBuffer &message) noexcept {
-        assert(socket != INVALID_SOCKET);
+        assert(socket != -1);
         auto sendBuffer = reinterpret_cast<const char *>(message.data());
         auto bufferLength = static_cast<int>(message.size());
         if (send(socket, sendBuffer, bufferLength, 0) == -1) {
@@ -152,7 +152,7 @@ namespace Net
     }
 
     bool socket_send_to(socket_t &socket, const addr_info_ptr &addr_info, const ByteBuffer &message) noexcept {
-        assert(socket != INVALID_SOCKET);
+        assert(socket != -1);
         auto sendBuffer = reinterpret_cast<const char *>(message.data());
         auto bufferLength = static_cast<int>(message.size());
         if (sendto(socket,
@@ -167,7 +167,7 @@ namespace Net
     }
 
     bool socket_shutdown(socket_t &socket) noexcept {
-        assert(socket != INVALID_SOCKET);
+        assert(socket != -1);
         if (shutdown(socket, SHUT_RDWR) == -1)
             return false;
         return true;
