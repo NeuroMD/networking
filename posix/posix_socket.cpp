@@ -1,4 +1,5 @@
 #include <unistd.h>
+#include <cassert>
 #include "posix_socket.h"
 #include "errno.h"
 
